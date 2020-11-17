@@ -13,7 +13,7 @@ public class Product {
     private String name;
     private String description;
     private Integer price;
-    private Long category_id;
+    private Integer category_id;
     private String picture;
 
     public String getId() {
@@ -48,11 +48,11 @@ public class Product {
         this.price = price;
     }
 
-    public Long getCategory_id() {
+    public Integer getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(Long category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
