@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.json.JSONObject;
@@ -52,11 +53,13 @@ public class BaseService {
         this.categoryRepository.saveAll(categories);
     }
 
-    public List<Product> search(String query) {
+    public List<Product> search(String query, Integer categoryId) {
         ElasticsearchOperations elasticsearchOperations = esConfig.elasticsearchTemplate();
+
         MultiMatchQueryBuilder multiMatchQuery = QueryBuilders.multiMatchQuery(query,"name","description");
         Query query2 = new NativeSearchQueryBuilder()
             .withQuery(multiMatchQuery)
+            .withFilter(QueryBuilders.matchQuery("category_id",categoryId))
             .build();
 
         List<Product> products = new ArrayList<>();
