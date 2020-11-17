@@ -28,8 +28,8 @@ public class ProductController {
 
 
     @GetMapping("/api/data")
-    public ResponseEntity<List<Product>> search(@RequestParam String query) {
-        List<Product> products = this.baseService.search(query);
+    public ResponseEntity<List<Product>> search(@RequestParam String query, @RequestParam Integer categoryId) {
+        List<Product> products = this.baseService.search(query,categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
